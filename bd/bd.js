@@ -1,13 +1,14 @@
 import mongoose from "mongoose"
+import "env/config"
 
 async function conectarBD(){
 	try{
-		const repuestaMongo = await mongoose.connect("mongodb+srv://david5:hola@cluster0.oytnytl.mongodb.net/?retryWrites=true&w=majority&appName=backend1")
-		
-		console.log("Conexión con MongoDB Atlas exitosa.")
+		const repuestaMongo=await mongoose.connect(process.env.SECRET_MONGO)
+		//mongoose.conect("mongodb://user:/contraseña")
+		console.log("Conexion con MongoDB Atlas")
 	}
 	catch(err){
-		console.log("Error en la conexión a la base de datos: "+err)
+		console.log("Error en: "+err)
 	}
 }
 
