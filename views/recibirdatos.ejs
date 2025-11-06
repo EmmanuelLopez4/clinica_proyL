@@ -1,0 +1,12 @@
+<%- include ("templates/header.ejs", {titulo:"Datos Recibidos"}) %>
+
+<div class="container my-4">
+    <h2>Datos Recibidos con Éxito</h2>
+    
+    <div class="alert alert-primary" role="alert"> Nombre: **<%= nombre %>**</div>
+    <div class="alert alert-primary" role="alert"> Edad: **<%= edad %>**</div>
+    
+    <a href="/" class="btn btn-primary mt-3">Volver al Inicio</a>
+</div>
+
+<%- include("templates/flooter.ejs") %>

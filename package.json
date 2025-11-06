@@ -1,0 +1,20 @@
+{
+  "name": "dental-clinic-backend1",
+  "version": "1.0.0",
+  "description": "Backend + simple frontend for a dental clinic project (Express + Mongoose)",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.10",
+    "express": "^4.18.2",
+    "express-validator": "^6.14.0",
+    "mongoose": "^7.0.0",
+    "morgan": "^1.10.0"
+  }
+}

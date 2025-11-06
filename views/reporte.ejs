@@ -1,0 +1,46 @@
+<%- include("templates/header.ejs", {titulo: "Reporte General"}) %>
+
+    <div class="container my-4">
+        <h2> Reporte General de la Clínica</h2>
+
+        <h3 class="mt-5">Citas Programadas </h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Odontólogo</th>
+                    <th>Paciente</th>
+                    <th>ID Paciente</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% citasBD.forEach((cita) => { %>
+                <tr>
+                    <td><%= new Date(cita.date).toLocaleDateString('es-ES') %></td>
+                    <td><%= cita.dentist %></td>
+                    <td><%= cita.paciente ? (cita.paciente.firstName + ' ' + cita.paciente.lastName) : 'ID Inválido' %></td>
+                    <td><%= cita.paciente ? cita.paciente._id : 'N/A' %></td>
+                </tr>
+                <% }) %>
+                <% if (citasBD.length === 0) { %>
+                    <tr><td colspan="4" class="text-center">No hay citas registradas.</td></tr>
+                <% } %>
+            </tbody>
+        </table>
+
+        <h3 class="mt-5">Listado Completo de Pacientes</h3>
+        <ul class="list-group">
+            <% pacientesBD.forEach((paciente) => { %>
+            <li class="list-group-item">
+                -- <%= paciente.firstName %> <%= paciente.lastName %> -- (<%= paciente.phone || 'Teléfono N/A' %>) 
+                -- Email: <%= paciente.email || 'N/A' %>
+            </li>
+            <% }) %>
+            <% if (pacientesBD.length === 0) { %>
+                <li class="list-group-item text-center">No hay pacientes registrados.</li>
+            <% } %>
+        </ul>
+        
+    </div>
+
+<%- include("templates/flooter.ejs") %>

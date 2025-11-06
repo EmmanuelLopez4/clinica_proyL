@@ -1,0 +1,54 @@
+<%- include("templates/header.ejs", {titulo: "Citas"}) %>
+
+    <div class="container my-4">
+        <h2>Registro y Consulta de Citas</h2>
+        
+        <div id="msg"></div>
+        
+        <form id="apptForm" action="/api/citas" method="POST" class="mb-3">
+            <h4 class="mb-3">Programar Nueva Cita (Agregar)</h4>
+            <div class="row g-2">
+                <div class="col-4"><input class="form-control" name="paciente" placeholder="ID Paciente (pegar)" required></div>
+                <div class="col-4"><input class="form-control" name="dentist" placeholder="Nombre del Odontólogo" required></div>
+                <div class="col-4"><input type="text" class="form-control" name="date" placeholder="dd/mm/aaaa" required></div>
+                </div>
+            <button type="submit" class="btn btn-primary mt-2">Crear Cita</button>
+        </form>
+
+        <hr>
+
+        <h4 class="mb-3">Citas Programadas</h4>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Odontólogo</th>
+                    <th>Paciente</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% citasBD.forEach((cita) => { %>
+                <tr>
+                    <td><strong><%= cita.dentist %></strong></td>
+                    <td><%= cita.paciente ? (cita.paciente.firstName + ' ' + cita.paciente.lastName) : 'ID Inválido' %></td>
+                    
+                    <td><%= new Date(cita.date).toLocaleDateString('es-ES') %></td> 
+                    
+                    <td>
+                        <a href="/citas/editar/<%= cita._id %>" class="btn btn-sm btn-info text-white me-2">Modificar</a>
+                        <form action="/api/citas/borrar/<%= cita._id %>" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+                <% if (citasBD.length === 0) { %>
+                    <tr><td colspan="4" class="text-center text-secondary">No hay citas registradas.</td></tr>
+                <% } %>
+            </tbody>
+        </table>
+
+    </div>
+    
+<%- include("templates/flooter.ejs") %>
